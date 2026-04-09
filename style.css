@@ -33,6 +33,55 @@ body {
     line-height: 1.6;
 }
 
+.jungle-leaves {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.leaf {
+    position: absolute;
+    font-size: 3rem;
+    opacity: 0;
+    filter: blur(3px);
+    transform: translateY(100vh) rotate(0deg);
+    transition: opacity 1.2s ease, transform 1.2s ease, filter 0.8s ease;
+}
+
+.leaf.visible {
+    opacity: 0.25;
+    filter: blur(2px);
+}
+
+.leaf-1 { left: 5%; top: 20%; animation: floatLeaf1 15s ease-in-out infinite; }
+.leaf-2 { left: 90%; top: 35%; animation: floatLeaf2 18s ease-in-out infinite; }
+.leaf-3 { left: 3%; top: 55%; animation: floatLeaf3 20s ease-in-out infinite; }
+.leaf-4 { left: 92%; top: 70%; animation: floatLeaf1 17s ease-in-out infinite reverse; }
+.leaf-5 { left: 8%; top: 85%; animation: floatLeaf2 22s ease-in-out infinite; }
+.leaf-6 { left: 88%; top: 15%; animation: floatLeaf3 16s ease-in-out infinite reverse; }
+.leaf-7 { left: 2%; top: 40%; animation: floatLeaf2 19s ease-in-out infinite; }
+.leaf-8 { left: 95%; top: 60%; animation: floatLeaf1 21s ease-in-out infinite reverse; }
+
+@keyframes floatLeaf1 {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-30px) rotate(10deg); }
+}
+
+@keyframes floatLeaf2 {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-40px) rotate(-15deg); }
+}
+
+@keyframes floatLeaf3 {
+    0%, 100% { transform: translateY(0) rotate(5deg); }
+    50% { transform: translateY(-25px) rotate(-5deg); }
+}
+
 .hero {
     position: relative;
     height: 280px;

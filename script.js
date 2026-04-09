@@ -3,6 +3,41 @@ document.addEventListener('DOMContentLoaded', () => {
         navigator.serviceWorker.register('/sw.js');
     }
 
+    // Jungle leaves - show after scroll
+    const leaves = document.querySelectorAll('.leaf');
+    let leavesShown = false;
+    let maxScrollReached = 0;
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.scrollY;
+        maxScrollReached = Math.max(maxScrollReached, currentScroll);
+
+        // Show leaves after scroll down
+        if (!leavesShown && currentScroll > 100) {
+            leaves.forEach((leaf, i) => {
+                setTimeout(() => leaf.classList.add('visible'), i * 100);
+            });
+            leavesShown = true;
+        }
+
+        // Hide leaves when scrolling back to top
+        if (leavesShown && currentScroll < 100) {
+            leaves.forEach((leaf) => {
+                leaf.classList.remove('visible');
+            });
+            leavesShown = false;
+            maxScrollReached = currentScroll;
+        }
+        
+        // Parallax effect
+        const scrolled = window.scrollY;
+        leaves.forEach((leaf, index) => {
+            const speed = 0.03 + (index * 0.01);
+            const yPos = scrolled * speed;
+            leaf.style.transform = `translateY(${yPos}px) rotate(${yPos * 0.05}deg)`;
+        });
+    });
+
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.sticky-nav a');
     const stickyNav = document.querySelector('.sticky-nav');
